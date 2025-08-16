@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../C++ Language"
+		},
+		{
+			"path": "../../C_Programes-ST3"
+		},
+		{
+			"path": "../../JAVA"
+		},
+		{
+			"path": "../../HTML"
+		},
+		{
+			"path": "../../portfolioKunal"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "HTML"
+	}
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interface with Graphs</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .language-card {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    color: white;
+    box-shadow: 0 0 10px #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .language-card h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  .language-card p {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  canvas {
+    max-width: 100% !important;
+    height: 150px !important;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="language-card" id="html-card">
+    <h2>HTML</h2>
+    <p>
+      HTML stands for HyperText Markup Language. It is the standard language
+      for creating web pages.
+    </p>
+    <canvas id="htmlChart"></canvas>
+  </div>
+  <div class="language-card" id="css-card">
+    <h2>CSS</h2>
+    <p>
+      CSS stands for Cascading Style Sheets. It describes how HTML elements
+      are to be displayed on screen.
+    </p>
+    <canvas id="cssChart"></canvas>
+  </div>
+  <div class="language-card" id="js-card">
+    <h2>JavaScript</h2>
+    <p>
+      JavaScript is a programming language used to make web pages interactive.
+    </p>
+    <canvas id="jsChart"></canvas>
+  </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // HTML Chart - Example: Usage percentages of HTML tags
+  const ctxHtml = document.getElementById('htmlChart').getContext('2d');
+  new Chart(ctxHtml, {
+    type: 'bar',
+    data: {
+      labels: ['div', 'p', 'a', 'img', 'span'],
+      datasets: [{
+        label: 'Usage %',
+        data: [40, 30, 15, 10, 5],
+        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white' },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: 'white' },
+          grid: { display: false }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: 'white' } },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+
+  // CSS Chart - Example: Popularity of CSS properties
+  const ctxCss = document.getElementById('cssChart').getContext('2d');
+  new Chart(ctxCss, {
+    type: 'bar',
+    data: {
+      labels: ['color', 'margin', 'padding', 'font-size', 'background'],
+      datasets: [{
+        label: 'Frequency %',
+        data: [35, 25, 20, 15, 5],
+        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white' },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: 'white' },
+          grid: { display: false }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: 'white' } },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+
+  // JS Chart - Example: Popular JS concepts usage
+  const ctxJs = document.getElementById('jsChart').getContext('2d');
+  new Chart(ctxJs, {
+    type: 'bar',
+    data: {
+      labels: ['Variables', 'Functions', 'DOM', 'Events', 'Promises'],
+      datasets: [{
+        label: 'Usage %',
+        data: [30, 25, 20, 15, 10],
+        backgroundColor: 'rgba(255, 206, 86, 0.7)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1,
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white' },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: 'white' },
+          grid: { display: false }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: 'white' } },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

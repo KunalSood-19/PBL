@@ -1,0 +1,201 @@
+/* Container setup remains same */
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+ background: linear-gradient(to right, #e0f7fa, #e3f2fd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 3s;
+}
+
+/* Logo PNG animation */
+.logo-img {
+  width: 200px; /* Adjust as needed */
+  animation: logoZoomSequence 3s ease forwards;
+}
+
+@keyframes logoZoomSequence {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  33% {
+    transform: scale(1.8);
+    opacity: 1;
+  }
+  66% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body, html {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SECTION */
+.login-section {
+  flex: 1;
+  background-color: #1f1f1f;
+  color: white;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.login-section p {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.login-section label {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.login-section input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  background: #2d2d2d;
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+.login-section button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 30px;
+  background-color: #a362ea;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-section button:hover {
+  background-color: #8b4dde;
+}
+
+.forgot {
+  margin-top: 15px;
+}
+
+.forgot a {
+  color: #888;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* RIGHT SECTION */
+.welcome-section {
+  flex: 1;
+  background: #a362ea;
+  color: white;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.welcome-section h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.welcome-section span {
+  color: #fff;
+  font-weight: 600;
+}
+
+.welcome-section p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  color: #eee;
+}
+
+.welcome-section img {
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .login-section, .welcome-section {
+    flex: none;
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .welcome-section img {
+    max-width: 100%;
+  }
+}
+
+
+
+.video-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+}

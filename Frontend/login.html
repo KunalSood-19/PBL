@@ -6,19 +6,22 @@
   <title>Student Portal Login</title>
   <link rel="stylesheet" href="login.css" />
 </head>
+
 <body>
   <div class="container">
-    <div class="login-section">
+    <div class="login-section login-box">
       <h2>Login</h2>
       <p>Enter your credentials below</p>
-      <form>
+      <form id="loginForm">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="example@domain.com" required>
+        <input type="email" id="email" placeholder="example@domain.com">
 
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter password" required>
+        <input type="password" id="password" placeholder="Enter password">
 
         <button type="submit">Login</button>
+
+        <div id="message" style="margin-top:10px;"></div>
 
         <div class="forgot">
           <a href="#">Forgot your password?</a>
@@ -26,65 +29,131 @@
       </form>
     </div>
 
-   
     <div class="welcome-section">
-    
       <img src="img4.png" alt="Student Illustration" />
     </div>
   </div>
-  
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
-// ✅ Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyDokgC29ZW2v0MJDKVifnvH1M8W6sXJXUI",
-  authDomain: "my-login-project-243c5.firebaseapp.com",
-  projectId: "my-login-project-243c5",
-  storageBucket: "my-login-project-243c5.appspot.com",
-  messagingSenderId: "252344831078",
-  appId: "1:252344831078:web:59ee84778dd2a94854b1a7",
-  measurementId: "G-R0Q6WDB4YL"
-};
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
 
-// ✅ Map each user email to their dashboard page
-const dashboards = {
-  "kunalsood15@gmail.com": "dashboard.html",
-  "sukhamritsingh1512@gmail.com": "dashboard2.html",
-  "sidharth.zs.05.01@gmail.com": "dashboard3.html"
-};
 
-// ✅ Login Event
-document.querySelector("form").addEventListener("submit", (e) => {
-  e.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      alert("Login successful!");
 
-     
-      if (dashboards[email]) {
-        window.location.href = dashboards[email]; 
-      } else {
-        window.location.href = "dashboard.html"; // fallback
+
+
+
+
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script type="module">
+    // ========== FORM VALIDATION ==========
+    function validateForm(email, password, msg) {
+      // Empty check
+      if (email === "" || password === "") {
+        msg.style.color = "yellow";
+        msg.innerHTML = "⚠️ Please fill all fields!";
+        return false;
       }
-    })
-    .catch((error) => {
-      alert(error.message);
+      // Invalid email format
+      else if (email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+        msg.style.color = "red";
+        msg.innerHTML = "❌ Enter a valid email address!";
+        return false;
+      }
+      // Password too short
+      else if (password.length < 5) {
+        msg.style.color = "red";
+        msg.innerHTML = "🔒 Password must be at least 5 characters!";
+        return false;
+      }
+      // Passed all checks
+      return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    // ========== FIREBASE IMPORTS ==========
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+    // ========== FIREBASE CONFIG ==========
+    const firebaseConfig = {
+      apiKey: "AIzaSyDokgC29ZW2v0MJDKVifnvH1M8W6sXJXUI",
+      authDomain: "my-login-project-243c5.firebaseapp.com",
+      projectId: "my-login-project-243c5",
+      storageBucket: "my-login-project-243c5.appspot.com",
+      messagingSenderId: "252344831078",
+      appId: "1:252344831078:web:59ee84778dd2a94854b1a7",
+      measurementId: "G-R0Q6WDB4YL"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Dashboard mapping (you can add more)
+    const dashboards = {
+      "kunalsood15@gmail.com": "dashboard.html",
+      "sukhamritsingh1512@gmail.com": "dashboard2.html",
+      "sidharth.zs.05.01@gmail.com": "dashboard3.html"
+    };
+
+    // ========== LOGIN EVENT ==========
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("message");
+
+      // First run basic validation
+      if (!validateForm(email, password, msg)) return;
+
+      // If valid → try Firebase login
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          msg.style.color = "lightgreen";
+          msg.innerHTML = "✅ Login Successful! Redirecting...";
+
+          // DOM Manipulation Example
+          document.querySelector(".login-box").innerHTML = `
+            <h2>Welcome!</h2>
+            <p>Email: ${email}</p>
+            <p>Firebase login + Validation Successful.</p>
+            <button onclick="location.reload()">Logout</button>
+          `;
+          document.body.style.background = "linear-gradient(to right, #00c6ff, #0072ff)";
+
+          // Redirect to user's dashboard
+          setTimeout(() => {
+            if (dashboards[email]) {
+              window.location.href = dashboards[email];
+            } else {
+              window.location.href = "dashboard.html";
+            }
+          }, 1500);
+        })
+        .catch((error) => {
+          msg.style.color = "red";
+          msg.innerHTML = "❌ " + error.message;
+        });
     });
-});
-</script>
-
-
+  </script>
 </body>
 </html>

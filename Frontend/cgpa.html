@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGPA Calculator</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .calculator-container {
+        max-width: 650px;
+        margin: 50px auto;
+        padding: 40px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .calculator-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        padding: 10px 15px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(0,123,255,0.2);
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        border-radius: 12px;
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+        border: none;
+        color: white;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: linear-gradient(45deg, #00c6ff, #007bff);
+    }
+
+    #result, #note {
+        padding: 15px;
+        border-radius: 12px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    #result {
+        background-color: #f0f8ff;
+        color: #007bff;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    #note {
+        background-color: #e6ffe6;
+        color: #28a745;
+        font-size: 18px;
+    }
+
+    .error {
+        background-color: #ffe6e6 !important;
+        color: #dc3545 !important;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h3>CGPA Calculator</h3>
+    
+    <div class="mb-3">
+    <label for="subject1" class="form-label">Subject 1 Marks (Out of 50):</label>
+    <input type="number" class="form-control" id="subject1" min="0" max="50">
+</div>
+    
+    <div class="mb-3">
+        <label for="subject2" class="form-label">Subject 2 Marks (Out of 50):</label>
+        <input type="number" class="form-control" id="subject2" min="0" max="50">
+    </div>
+    
+    <div class="mb-3">
+        <label for="subject3" class="form-label">Subject 3 Marks (Out of 50):</label>
+        <input type="number" class="form-control" id="subject3" min="0" max="50">
+    </div>
+    
+    <div class="mb-3">
+        <label for="subject4" class="form-label">Subject 4 Marks (Out of 50):</label>
+        <input type="number" class="form-control" id="subject4" min="0" max="50">
+    </div>
+    
+    <div class="mb-3">
+        <label for="subject5" class="form-label">Subject 5 Marks (Out of 50):</label>
+        <input type="number" class="form-control" id="subject5" min="0" max="50">
+    </div>
+    
+    <button onclick="calculateCGPA()">Calculate CGPA</button>
+    
+    <div class="mt-4">
+        <h5 id="result"></h5>
+        <p id="note"></p>
+    </div>
+</div>
+
+<script>
+function calculateCGPA() {
+    const subjects = [
+        document.getElementById("subject1").value,
+        document.getElementById("subject2").value,
+        document.getElementById("subject3").value,
+        document.getElementById("subject4").value,
+        document.getElementById("subject5").value
+    ];
+
+    // Check for empty fields
+    for (let i = 0; i < subjects.length; i++) {
+        if (subjects[i] === "") {
+            document.getElementById("result").innerText = "Please fill all fields!";
+            document.getElementById("note").innerText = "";
+            document.getElementById("result").classList.add("error");
+            return;
+        }
+    }
+
+    // Convert to numbers
+    const marks = subjects.map(Number);
+
+    // Check for marks > 50 or < 0
+    for (let i = 0; i < marks.length; i++) {
+        if (marks[i] > 50 || marks[i] < 0) {
+            document.getElementById("result").innerText = "Wrong marks entered!";
+            document.getElementById("note").innerText = "";
+            document.getElementById("result").classList.add("error");
+            return;
+        }
+    }
+
+    const obtainedMarks = marks.reduce((a, b) => a + b, 0);
+    const totalMarks = 50 * 5;
+
+    const cgpa = ((obtainedMarks / totalMarks) * 10).toFixed(2);
+
+    let note = "";
+    if (cgpa >= 9) {
+        note = "Excellent Performance!";
+    } else if (cgpa >= 7) {
+        note = "Good Performance!";
+    } else if (cgpa >= 5) {
+        note = "Satisfactory Performance!";
+    } else {
+        note = "Needs Improvement!";
+    }
+
+    const resultEl = document.getElementById("result");
+    const noteEl = document.getElementById("note");
+
+    resultEl.innerText = `Your CGPA: ${cgpa}`;
+    noteEl.innerText = note;
+
+    resultEl.classList.remove("error");
+}
+</script>
+
+</body>
+</html>

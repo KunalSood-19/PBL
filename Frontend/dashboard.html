@@ -345,20 +345,7 @@
     });
   </script>
 
-  <script>
-    // Sidebar toggle
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("active");
-    }
-
-    // Course search
-    const courses = [
-      { name: "Object Oriented Programming", id: "CS201", credits: 4, coordinator: "Dr. K. Sharma" },
-      { name: "Fundamentals of Database Systems", id: "CS202", credits: 3, coordinator: "Dr. R. Gupta" },
-      { name: "Data Structures & Algorithms", id: "CS203", credits: 4, coordinator: "Dr. S. Mehta" },
-      { name: "Operating Systems", id: "CS204", credits: 3, coordinator: "Dr. P. Singh" }
-    ];
-
+ 
     function searchCourse() {
       const input = document.getElementById("ii").value.trim().toLowerCase();
       const course = courses.find(c => c.name.toLowerCase() === input);

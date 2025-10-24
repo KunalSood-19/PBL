@@ -8,46 +8,41 @@
 </head>
 <body>
  
- <div class="intro">
+<div class="intro">
   <img src="img1-removebg-preview.png" alt="Smart Student Portal" class="logo-img" />
 </div>
 
-  <div class="container">
+<div class="container">
+  <div class="login-section">
+    <h2>Create Account</h2>
+    <p>Enter your details below to sign up</p>
 
-    <div class="login-section">
-      <h2>Create Account</h2>
-      <p>Enter your details below to sign up</p>
-      <form>
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Your name" required>
+    <form id="signupForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your name" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="example@domain.com" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="example@domain.com" required>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Create password" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Create password" required>
 
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" placeholder="Repeat password" required>
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" placeholder="Repeat password" required>
 
-        <button type="submit">Sign Up</button>
+      <button type="submit">Sign Up</button>
 
-        <div class="forgot">
-          <a href="login.html">Already have an account? Login</a>
-        </div>
-      </form>
-    </div>
-
-  
-    <div class="welcome-section">
-      
-      <img src="img4.png" alt="Student Illustration" class="img4"/>
-    </div>
+      <div class="forgot">
+        <a href="login.html">Already have an account? Login</a>
+      </div>
+    </form>
   </div>
 
+  <div class="welcome-section">
+    <img src="img4.png" alt="Student Illustration" class="img4"/>
+  </div>
+</div>
 
-
-  
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
@@ -57,7 +52,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDokgC29ZW2v0MJDKVifnvH1M8W6sXJXUI",
   authDomain: "my-login-project-243c5.firebaseapp.com",
   projectId: "my-login-project-243c5",
-  storageBucket: "my-login-project-243c5.appspot.com", /* fixed .app -> .appspot.com */
+  storageBucket: "my-login-project-243c5.appspot.com",
   messagingSenderId: "252344831078",
   appId: "1:252344831078:web:59ee84778dd2a94854b1a7",
   measurementId: "G-R0Q6WDB4YL"
@@ -67,7 +62,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-document.querySelector("form").addEventListener("submit", (e) => {
+document.getElementById("signupForm").addEventListener("submit", (e) => {
   e.preventDefault();
 
   const name = document.getElementById("name").value.trim();
@@ -75,11 +70,18 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirm-password").value;
 
+  // Basic validation
+  if (name === "" || email === "" || password === "" || confirmPassword === "") {
+    alert("Please fill out all fields.");
+    return;
+  }
+
   if (password !== confirmPassword) {
     alert("Passwords do not match!");
     return;
   }
 
+  // Firebase sign up
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       alert("Account created successfully!");
@@ -90,5 +92,6 @@ document.querySelector("form").addEventListener("submit", (e) => {
     });
 });
 </script>
+
 </body>
 </html>

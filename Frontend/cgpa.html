@@ -9,11 +9,75 @@
     body {
         background: linear-gradient(to right, #ece9e6, #ffffff);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        background-color: #915ee1;
+        color: white;
+        min-height: 100vh;
+        width: 220px;
+        padding: 20px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar img {
+        width: 140px;
+        display: block;
+        margin: 0 auto 30px;
+    }
+
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px 0;
+        font-weight: 500;
+    }
+
+    .sidebar a:hover {
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 8px;
+        padding-left: 15px;
+    }
+
+    /* Hamburger */
+    .hamburger {
+        display: none;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #915ee1;
+        color: white;
+        border: none;
+        font-size: 22px;
+        border-radius: 5px;
+        padding: 8px 12px;
+        cursor: pointer;
+        z-index: 1101;
+    }
+
+    /* Centered Calculator container */
+    .main-content {
+        margin-left: 220px; /* space for sidebar */
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
     }
 
     .calculator-container {
+        width: 100%;
         max-width: 650px;
-        margin: 50px auto;
         padding: 40px;
         background: #ffffff;
         border-radius: 20px;
@@ -86,43 +150,80 @@
         background-color: #ffe6e6 !important;
         color: #dc3545 !important;
     }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .sidebar {
+            transform: translateX(-100%);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+        .main-content {
+            margin-left: 0;
+        }
+    }
 </style>
 </head>
 <body>
 
-<div class="calculator-container">
-    <h3>CGPA Calculator</h3>
-    
-    <div class="mb-3">
-    <label for="subject1" class="form-label">Subject 1 Marks (Out of 50):</label>
-    <input type="number" class="form-control" id="subject1" min="0" max="50">
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <img src="img1-removebg-preview.png" alt="Logo">
+    <a href="#">Dashboard</a>
+    <a href="#">My Info</a>
+    <a href="#">Communication</a>
+    <a href="#">Image Gallery</a>
+    <a href="#">Notice</a>
+    <a href="#">CGPA Calculator</a>
+    <a href="#">Logout</a>
 </div>
-    
-    <div class="mb-3">
-        <label for="subject2" class="form-label">Subject 2 Marks (Out of 50):</label>
-        <input type="number" class="form-control" id="subject2" min="0" max="50">
-    </div>
-    
-    <div class="mb-3">
-        <label for="subject3" class="form-label">Subject 3 Marks (Out of 50):</label>
-        <input type="number" class="form-control" id="subject3" min="0" max="50">
-    </div>
-    
-    <div class="mb-3">
-        <label for="subject4" class="form-label">Subject 4 Marks (Out of 50):</label>
-        <input type="number" class="form-control" id="subject4" min="0" max="50">
-    </div>
-    
-    <div class="mb-3">
-        <label for="subject5" class="form-label">Subject 5 Marks (Out of 50):</label>
-        <input type="number" class="form-control" id="subject5" min="0" max="50">
-    </div>
-    
-    <button onclick="calculateCGPA()">Calculate CGPA</button>
-    
-    <div class="mt-4">
-        <h5 id="result"></h5>
-        <p id="note"></p>
+
+<!-- Hamburger -->
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('active')">☰</button>
+
+<!-- Main content -->
+<div class="main-content">
+    <div class="calculator-container">
+        <h3>CGPA Calculator</h3>
+        
+        <div class="mb-3">
+            <label for="subject1" class="form-label">Subject 1 Marks (Out of 50):</label>
+            <input type="number" class="form-control" id="subject1" min="0" max="50">
+        </div>
+        
+        <div class="mb-3">
+            <label for="subject2" class="form-label">Subject 2 Marks (Out of 50):</label>
+            <input type="number" class="form-control" id="subject2" min="0" max="50">
+        </div>
+        
+        <div class="mb-3">
+            <label for="subject3" class="form-label">Subject 3 Marks (Out of 50):</label>
+            <input type="number" class="form-control" id="subject3" min="0" max="50">
+        </div>
+        
+        <div class="mb-3">
+            <label for="subject4" class="form-label">Subject 4 Marks (Out of 50):</label>
+            <input type="number" class="form-control" id="subject4" min="0" max="50">
+        </div>
+        
+        <div class="mb-3">
+            <label for="subject5" class="form-label">Subject 5 Marks (Out of 50):</label>
+            <input type="number" class="form-control" id="subject5" min="0" max="50">
+        </div>
+        
+        <button onclick="calculateCGPA()">Calculate CGPA</button>
+        
+        <div class="mt-4">
+            <h5 id="result"></h5>
+            <p id="note"></p>
+        </div>
     </div>
 </div>
 
@@ -136,7 +237,6 @@ function calculateCGPA() {
         document.getElementById("subject5").value
     ];
 
-    // Check for empty fields
     for (let i = 0; i < subjects.length; i++) {
         if (subjects[i] === "") {
             document.getElementById("result").innerText = "Please fill all fields!";
@@ -146,10 +246,8 @@ function calculateCGPA() {
         }
     }
 
-    // Convert to numbers
     const marks = subjects.map(Number);
 
-    // Check for marks > 50 or < 0
     for (let i = 0; i < marks.length; i++) {
         if (marks[i] > 50 || marks[i] < 0) {
             document.getElementById("result").innerText = "Wrong marks entered!";
@@ -165,15 +263,10 @@ function calculateCGPA() {
     const cgpa = ((obtainedMarks / totalMarks) * 10).toFixed(2);
 
     let note = "";
-    if (cgpa >= 9) {
-        note = "Excellent Performance!";
-    } else if (cgpa >= 7) {
-        note = "Good Performance!";
-    } else if (cgpa >= 5) {
-        note = "Satisfactory Performance!";
-    } else {
-        note = "Needs Improvement!";
-    }
+    if (cgpa >= 9) note = "Excellent Performance!";
+    else if (cgpa >= 7) note = "Good Performance!";
+    else if (cgpa >= 5) note = "Satisfactory Performance!";
+    else note = "Needs Improvement!";
 
     const resultEl = document.getElementById("result");
     const noteEl = document.getElementById("note");

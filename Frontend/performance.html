@@ -58,8 +58,8 @@
 
     /* ===== Header ===== */
     header {
-      background: var(--primary);
-      color: white;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
       text-align: center;
       padding: 1.2rem 0;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -179,7 +179,7 @@
   const menuItems = [
     { text: 'Dashboard', href: 'dashboard.html' },
     { text: 'My Info', href: '#' },
-    { text: 'Communication', href: 'Communication' },
+    { text: 'Communication', href: 'Communication.html' },
     { text: 'Notice', href: '#' },
     { text: 'CGPA Calculator', href: 'cgpa.html' },
     { text: 'Logout', href: '#' }
@@ -194,7 +194,15 @@
 
   document.body.appendChild(sidebar);
 
-  // === Create Hamburger Menu ===
+  
+
+
+
+
+
+
+
+
   const hamburger = document.createElement('button');
   hamburger.className = 'hamburger';
   hamburger.innerHTML = '☰';

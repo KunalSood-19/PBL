@@ -24,3 +24,22 @@
             background-color: rgba(255, 255, 255, 0.1); /* Slight white overlay on hover */
             transform: translateX(4px); /* Slide effect on hover */
         }
+        
+        /* Active link styling - Note: 'active' class is now applied via JS below */
+        .sidebar-link.active {
+            background-color: var(--portal-light-accent); /* Light tint for background */
+            color: #fff; /* White text */
+            font-weight: 600;
+            border-left: 4px solid #fff; /* White border for emphasis */
+            transform: none; /* Reset hover slide for active state */
+        }
+
+        /* Responsive Sidebar - Hidden on mobile, visible on desktop/tablet */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            .content-area {
+                margin-left: 0 !important;
+            }
+        }

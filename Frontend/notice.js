@@ -75,3 +75,29 @@
              // Instead of alert, we'll temporarily replace the main content
             const mainContent = document.querySelector('main');
             mainContent.innerHTML = `
+                <div class="p-8 bg-white rounded-xl shadow-lg max-w-4xl mx-auto">
+                    <button onclick="window.location.reload()" class="mb-4 text-portal-primary hover:text-portal-blue flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Back to Notice Board
+                    </button>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">${notice.title}</h2>
+                    <div class="flex items-center space-x-4 mb-6 text-sm text-gray-500">
+                        <span>Published: ${new Date(notice.date).toLocaleDateString()}</span>
+                        <span class="text-xs font-medium text-portal-primary bg-portal-light-accent px-2 py-1 inline-block rounded-full">${notice.category.charAt(0).toUpperCase() + notice.category.slice(1)}</span>
+                    </div>
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <p>${notice.content}</p>
+                        <p class="mt-4 italic border-l-4 border-gray-200 pl-4">
+                            This is the detailed content area. In a real application, clicking the card would load the full, multi-paragraph circular or document related to this notice.
+                        </p>
+                    </div>
+                </div>
+            `;
+        };
+        
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNotices(mockNotices);
+        });

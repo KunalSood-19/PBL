@@ -1,4 +1,4 @@
-/* Container setup remains same */
+
 .intro {
   position: fixed;
   top: 0;
@@ -14,7 +14,9 @@
   animation-delay: 3s;
 }
 
-/* Logo PNG animation */
+
+
+
 .logo-img {
   width: 200px; /* Adjust as needed */
   animation: logoZoomSequence 3s ease forwards;
@@ -55,16 +57,21 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+
+
 body, html {
   height: 100%;
 }
+
+
 
 .container {
   display: flex;
   height: 100vh;
 }
 
-/* LEFT SECTION */
+
+
 .login-section {
   flex: 1;
   background-color: #1f1f1f;
@@ -128,7 +135,8 @@ body, html {
   text-decoration: none;
 }
 
-/* RIGHT SECTION */
+
+
 .welcome-section {
   flex: 1;
   background: #a362ea;
@@ -164,7 +172,7 @@ body, html {
   margin: 0 auto;
 }
 
-/* Responsive */
+
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;

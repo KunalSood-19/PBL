@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Student Communication Dashboard</title>
 <style>
   :root {
@@ -16,7 +16,7 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     background: var(--light-gray);
-    color: var(--text);;
+    color: var(--text);
     overflow-x: hidden;
   }
 
@@ -36,6 +36,12 @@
     box-shadow: 2px 0 10px rgba(0,0,0,0.15);
   }
 
+  .sidebar img {
+    width: 160px;
+    display: block;
+    margin: 0 auto 30px;
+  }
+
   .sidebar a {
     color: white;
     text-decoration: none;
@@ -48,12 +54,6 @@
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding-left: 15px;
-  }
-
-  .sidebar img {
-    width: 160px;
-    display: block;
-    margin: 0 auto 30px;
   }
 
   /* ===== Header ===== */
@@ -103,7 +103,7 @@
     border-radius: 10px;
     padding: 15px;
     margin: 10px 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 12px rgba(0,0,0,0.1);
   }
 
   .card h3 {
@@ -131,7 +131,7 @@
     background: #6c63ff;
   }
 
-  /* Modal */
+  /* ===== Modal ===== */
   .modal {
     display: none;
     position: fixed;
@@ -192,7 +192,7 @@
     margin-left: 270px;
   }
 
-  /* Hamburger */
+  /* ===== Hamburger ===== */
   .hamburger {
     display: none;
     position: fixed;
@@ -208,7 +208,7 @@
     z-index: 1101;
   }
 
-  /* Responsive */
+  /* ===== Responsive ===== */
   @media (max-width: 992px) {
     .sidebar {
       transform: translateX(-100%);
@@ -234,158 +234,108 @@
 </head>
 <body>
 
+<!-- ===== Sidebar ===== -->
+<div class="sidebar" id="sidebar">
+  <img src="img1-removebg-preview.png" alt="Logo">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="#">My Info</a>
+  <a href="#">Notice</a>
+  <a href="performance.html">Performance</a>
+  <a href="cgpa.html">CGPA Calculator</a>
+  <a href="#">Logout</a>
+</div>
+
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('active')">☰</button>
+
+<!-- ===== Header ===== -->
+<header>
+  <h1>Student Communication Dashboard</h1>
+</header>
+
+<!-- ===== Main Container ===== -->
+<div class="container">
+
+  <!-- Mentor Section -->
+  <section class="section">
+    <h2>Mentor</h2>
+    <div class="card">
+      <h3>DR CHETNA</h3>
+      <p>Course: OOSE</p>
+      <p>Email: chetna@chitkara.edu.in</p>
+      <button class="message-btn" onclick="openModal('DR CHETNA')">Message</button>
+    </div>
+  </section>
+
+  <!-- Teachers Section -->
+  <section class="section">
+    <h2>Course Teachers</h2>
+
+    <div class="card">
+      <h3>DR VIBHU</h3>
+      <p>Course: Java Programming</p>
+      <p>Email: vibu@chitkara.edu.in</p>
+      <button class="message-btn" onclick="openModal('DR VIBHU')">Message</button>
+    </div>
+
+    <div class="card">
+      <h3>DR AMANDEEP</h3>
+      <p>Course: ES & IOT</p>
+      <p>Email: amandeep@chitkara.edu.in</p>
+      <button class="message-btn" onclick="openModal('DR AMANDEEP')">Message</button>
+    </div>
+
+    <div class="card">
+      <h3>DR AKSHAY</h3>
+      <p>Course: FEE</p>
+      <p>Email: akshay@chitkara.edu.in</p>
+      <button class="message-btn" onclick="openModal('DR AKSHAY')">Message</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===== Modal ===== -->
+<div class="modal" id="messageModal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('messageModal').style.display='none'">&times;</span>
+    <h3 id="modalRecipient">Message to </h3>
+    <input type="text" id="subject" placeholder="Subject">
+    <textarea id="message" rows="5" placeholder="Type your message here..."></textarea>
+    <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  &copy; 2025 | Student Communication Dashboard
+</footer>
+
+<!-- ===== JS for Modal Functionality ===== -->
 <script>
-  // === Sidebar ===
-  const sidebar = document.createElement('div');
-  sidebar.className = 'sidebar';
-  sidebar.id = 'sidebar';
+  const modal = document.getElementById("messageModal");
+  const modalRecipient = document.getElementById("modalRecipient");
 
-  const logo = document.createElement('img');
-  logo.src = 'img1-removebg-preview.png';
-  logo.alt = 'Logo';
-  sidebar.appendChild(logo);
-
-  const menuItems = [
-    { text: 'Dashboard', href: 'dashboard' },
-    { text: 'My Info', href: '#' },
-    { text: 'Notice', href: '#' },
-    { text: 'CGPA Calculator', href: 'cgpa' },
-    { text: 'Logout', href: '#' }
-  ];
-
-  menuItems.forEach(item => {
-    const link = document.createElement('a');
-    link.textContent = item.text;
-    link.href = item.href;
-    sidebar.appendChild(link);
-  });
-  document.body.appendChild(sidebar);
-
-  // Hamburger
-  const hamburger = document.createElement('button');
-  hamburger.className = 'hamburger';
-  hamburger.innerHTML = '☰';
-  hamburger.onclick = () => sidebar.classList.toggle('active');
-  document.body.appendChild(hamburger);
-
-  // Header
-  const header = document.createElement('header');
-  const h1 = document.createElement('h1');
-  h1.textContent = 'Student Communication Dashboard';
-  header.appendChild(h1);
-  document.body.appendChild(header);
-
-  // Container
-  const container = document.createElement('div');
-  container.className = 'container';
-  document.body.appendChild(container);
-
-  // Data for mentors & teachers
-  const mentors = [{name: 'DR CHETNA', course: 'OOSE', email: 'chetna@chitkara.edu.in'}];
-  const teachers = [
-    {name: 'DR VIBHU', course: 'Java Programming', email: 'vibu@chitkara.edu.in'},
-    {name: 'DR AMANDEEP', course: 'ES & IOT', email: 'amandeep@chitkara.edu.in'},
-    {name: 'DR AKSHAY', course: 'FEE', email: 'akshay@chitkara.edu.in'}
-  ];
-
-  function createSection(title, list) {
-    const section = document.createElement('section');
-    section.className = 'section';
-
-    const h2 = document.createElement('h2');
-    h2.textContent = title;
-    section.appendChild(h2);
-
-    list.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      const h3 = document.createElement('h3');
-      h3.textContent = item.name;
-      card.appendChild(h3);
-
-      const courseP = document.createElement('p');
-      courseP.textContent = 'Course: ' + item.course;
-      card.appendChild(courseP);
-
-      const emailP = document.createElement('p');
-      emailP.textContent = 'Email: ' + item.email;
-      card.appendChild(emailP);
-
-      const btn = document.createElement('button');
-      btn.className = 'message-btn';
-      btn.textContent = 'Message';
-      btn.onclick = () => openModal(item.name);
-      card.appendChild(btn);
-
-      section.appendChild(card);
-    });
-
-    container.appendChild(section);
+  function openModal(name) {
+    modalRecipient.textContent = "Message to " + name;
+    modal.style.display = "block";
   }
 
-  createSection('Mentor', mentors);
-  createSection('Course Teachers', teachers);
-
-  // Modal
-  const modal = document.createElement('div');
-  modal.className = 'modal';
-  modal.id = 'messageModal';
-
-  const modalContent = document.createElement('div');
-  modalContent.className = 'modal-content';
-
-  const closeSpan = document.createElement('span');
-  closeSpan.className = 'close';
-  closeSpan.textContent = '×';
-  closeSpan.onclick = () => modal.style.display = 'none';
-  modalContent.appendChild(closeSpan);
-
-  const modalH3 = document.createElement('h3');
-  modalH3.id = 'modalRecipient';
-  modalContent.appendChild(modalH3);
-
-  const subjectInput = document.createElement('input');
-  subjectInput.id = 'subject';
-  subjectInput.placeholder = 'Subject';
-  modalContent.appendChild(subjectInput);
-
-  const messageInput = document.createElement('textarea');
-  messageInput.id = 'message';
-  messageInput.rows = 5;
-  messageInput.placeholder = 'Type your message here...';
-  modalContent.appendChild(messageInput);
-
-  const sendBtn = document.createElement('button');
-  sendBtn.className = 'send-btn';
-  sendBtn.textContent = 'Send';
-  sendBtn.onclick = () => {
-    if(subjectInput.value && messageInput.value){
-      alert(`Message sent to ${modalH3.textContent}!\nSubject: ${subjectInput.value}\nMessage: ${messageInput.value}`);
-      subjectInput.value = '';
-      messageInput.value = '';
-      modal.style.display = 'none';
+  function sendMessage() {
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
+    if (subject && message) { 
+      alert(`Message sent!\nSubject: ${subject}\nMessage: ${message}`);
+      document.getElementById("subject").value = "";
+      document.getElementById("message").value = "";
+      modal.style.display = "none";
     } else {
-      alert('Please enter both subject and message.');
+      alert("Please fill both Subject and Message fields.");
     }
-  };
-  modalContent.appendChild(sendBtn);
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-
-  function openModal(name){
-    modalH3.textContent = 'Message to ' + name;
-    modal.style.display = 'block';
   }
 
-  window.onclick = (event) => {
-    if(event.target === modal) modal.style.display = 'none';
+  window.onclick = function(event) {
+    if (event.target === modal) modal.style.display = "none";
   };
-
-  // Footer
-  const footer = document.createElement('footer');
-  footer.innerHTML = '&copy; 2025 | Student Communication Dashboard';
-  document.body.appendChild(footer);
 </script>
+
 </body>
 </html>

@@ -1,0 +1,185 @@
+:root {
+    --primary-color: #7b2ff7; /* The requested contrast color */
+    --sidebar-bg: #4a148c; /* Slightly darker shade for the sidebar background */
+    --main-bg: #f4f4f9;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --light-text: #666;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--main-bg);
+    color: var(--text-color);
+}
+
+.portal-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    margin-right: 10px;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, padding-left 0.3s;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding-left: 25px;
+}
+
+.nav-menu a.active {
+    background-color: #5d19b7; /* A slightly darker shade for the active link */
+    border-left: 5px solid white;
+    padding-left: 20px;
+    font-weight: 600;
+}
+
+/* --- Main Content Styles --- */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+header p {
+    color: var(--light-text);
+    margin-bottom: 30px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-block {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid var(--primary-color);
+}
+
+.info-block h2 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.info-block h2 i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: 500;
+    color: var(--light-text);
+    flex: 1;
+}
+
+.value {
+    font-weight: 600;
+    text-align: right;
+    flex: 1.5;
+    color: var(--text-color);
+}
+
+.value.gpa {
+    color: #28a745; /* Highlight GPA in green */
+    font-size: 1.1em;
+}
+
+.value.address {
+    font-style: italic;
+    white-space: normal;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* --- Action Area Styles --- */
+.action-area {
+    background-color: #e8eaf6; /* Light background for the action strip */
+    border: 1px solid #c5cae9;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.update-message {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal Notice Board</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="notice.css">
+
+    <script>
+        // Custom Tailwind Configuration to use the portal's branding color
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'portal-primary': '#7b2ff7', // Updated main purple color
+                        'portal-blue': '#0072ff',   // Accent color for hover/borders (kept same)
+                        'portal-light-accent': 'rgba(123, 47, 247, 0.15)',  // Light tint for active state background (updated based on #7b2ff7)
+                        'portal-bg': '#f7f9fc',
+                    },
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- Main Application Container (Fixed Sidebar + Main Content) -->
+    <div class="min-h-screen flex bg-portal-bg">
+        <!-- Sidebar (W-64) -->
+        <aside class="sidebar w-64 bg-portal-primary shadow-xl flex flex-col fixed inset-y-0 z-10 text-white hidden lg:flex">
+            <!-- Logo Area (Smartdesk) -->
+            <div class="p-6 text-2xl font-bold flex items-center border-b border-portal-primary/50">
+                <!-- Mock Logo/Icon matching the image -->
+                <img src="img1-removebg-preview.png" alt="">
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-grow p-4 space-y-1">
+                <a href="dashboard.html" id="nav-dashboard" class="sidebar-link block p-3 rounded-lg pl-6">Dashboard</a>
+                <a href="#" id="nav-myinfo" class="sidebar-link block p-3 rounded-lg pl-6">My Info</a>
+                <a href="#" id="nav-performance" class="sidebar-link block p-3 rounded-lg pl-6">Performance</a>
+                <a href="#" id="nav-communication" class="sidebar-link block p-3 rounded-lg pl-6">Communication</a>
+
+                
+                <!-- Active Link -->
+                <a href="#" id="nav-notice" class="sidebar-link active block p-3 rounded-lg pl-6">Notice</a>
+                
+                <a href="#" id="nav-cgpa" class="sidebar-link block p-3 rounded-lg pl-6">CGPA Calculator</a>
+                
+                <!-- Separator for Logout -->
+                <div class="mt-4 border-t border-white/20"></div>
+
+                <a href="login.html" id="nav-logout" class="sidebar-link block p-3 rounded-lg text-white/90 hover:bg-red-600 pl-6">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area flex-1 lg:ml-64 p-4 md:p-8">
+
+            <!-- Title Header in the Main Content -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Official Notice Board</h1>
+                <p class="text-gray-500 mt-1 text-sm">Latest Announcements & Circulars for Students</p>
+            </div>
+
+            <!-- Filter and Search Bar -->
+            <div class="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Search by title or keyword..." 
+                    class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-portal-primary transition duration-150"
+                    oninput="filterNotices()"
+                >
+                <select 
+                    id="category-select"
+                    class="p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-portal-primary transition duration-150"
+                    onchange="filterNotices()"
+                >
+                    <option value="all">All Categories</option>
+                    <option value="academic">Academic</option>
+                    <option value="exam">Examination</option>
+                    <option value="event">Events & Clubs</option>
+                    <option value="admin">Administration</option>
+                </select>
+            </div>
+
+            <!-- Notices Grid/List -->
+            <div id="notices-container" class="space-y-6">
+                <!-- Mock Notices will be rendered here -->
+            </div>
+
+            <!-- No Notices Message -->
+            <div id="no-notices-message" class="hidden text-center py-12 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-10 w-10 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                </svg>
+                <p class="mt-4 text-xl">No notices found matching your criteria.</p>
+                <p class="text-sm">Please try a different search or filter setting.</p>
+            </div>
+
+        </main>
+    </div>
+<script src="notice.js">
+
+</script>
+
+</body>
+</html>

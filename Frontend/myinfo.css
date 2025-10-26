@@ -183,3 +183,142 @@ header p {
     font-weight: 600;
     transition: background-color 0.3s, transform 0.1s;
 }
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #631dc5; /* Darker primary color on hover */
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.secondary-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+.close-btn {
+    color: var(--light-text);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .portal-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
+    .nav-menu a {
+        padding: 10px 15px;
+        border-left: none !important;
+        font-size: 14px;
+    }
+
+    .nav-menu a.active {
+        background-color: #5d19b7;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .action-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons {
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+.value.gpa {
+    color: #28a745; /* Highlight GPA in green */
+    font-size: 1.1em;
+}
+
+/* --- New Fee Status Styles --- */
+.value.fee-amount.due {
+    color: #dc3545; /* Red for amount due */
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.value.paid {
+    color: #28a745; /* Green for paid status */
+    font-weight: 700;
+}
+
+.value.deadline {
+    color: #ffc107; /* Yellow/Orange for deadlines */
+    font-weight: 700;
+}
+
+.value.address {
+    font-style: italic;
+    white-space: normal;
+    text-align: right;
+    line-height: 1.4;
+}

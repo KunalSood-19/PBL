@@ -1,4 +1,4 @@
- // Mock data for notices
+
         const mockNotices = [
             { id: 1, title: "Mid-Term Exam Schedule Released", date: "2024-11-15", category: "exam", content: "The schedule for all mid-term examinations is now available for download on the Academic tab.", isNew: true },
             { id: 2, title: "Library Annual Closure for Audit", date: "2024-11-01", category: "admin", content: "The Central Library will be closed from Nov 1st to Nov 5th for mandatory annual inventory and audit.", isNew: false },
@@ -12,7 +12,6 @@
         const searchInput = document.getElementById('search-input');
         const categorySelect = document.getElementById('category-select');
 
-        // Function to render a single notice card
         const createNoticeCard = (notice) => {
             const card = document.createElement('div');
             card.id = `notice-${notice.id}`;
@@ -35,12 +34,10 @@
                     ${notice.category.charAt(0).toUpperCase() + notice.category.slice(1)}
                 </div>
             `;
-            // Add a mock click handler for viewing details
             card.onclick = () => showNoticeDetail(notice);
             return card;
         };
 
-        // Function to render all notices
         const renderNotices = (notices) => {
             noticesContainer.innerHTML = '';
             if (notices.length === 0) {
@@ -53,7 +50,6 @@
             });
         };
 
-        // Function to filter notices based on search and category
         window.filterNotices = () => {
             const query = searchInput.value.toLowerCase().trim();
             const category = categorySelect.value;
@@ -70,9 +66,8 @@
             renderNotices(filtered);
         };
 
-        // Mock detail view (in a real app, this would open a modal or new page)
         const showNoticeDetail = (notice) => {
-             // Instead of alert, we'll temporarily replace the main content
+
             const mainContent = document.querySelector('main');
             mainContent.innerHTML = `
                 <div class="p-8 bg-white rounded-xl shadow-lg max-w-4xl mx-auto">
@@ -97,7 +92,6 @@
             `;
         };
         
-        // Initial render on page load
         document.addEventListener('DOMContentLoaded', () => {
             renderNotices(mockNotices);
         });

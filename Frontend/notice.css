@@ -1,45 +1,43 @@
- body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--portal-bg); /* Use the light background color */
-        }
-        
-        /* Notice Card Styling */
-        .notice-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-        }
-        .notice-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(123, 47, 247, 0.2), 0 4px 6px -4px rgba(123, 47, 247, 0.1); /* Updated shadow color */
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--portal-bg);
+}
 
-        /* Sidebar Styling */
-        .sidebar-link {
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            color: #fff; /* White text on purple background */
-            /* Add a small transition for the hover effect */
-        }
-        .sidebar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* Slight white overlay on hover */
-            transform: translateX(4px); /* Slide effect on hover */
-        }
-        
-        /* Active link styling - Note: 'active' class is now applied via JS below */
-        .sidebar-link.active {
-            background-color: var(--portal-light-accent); /* Light tint for background */
-            color: #fff; /* White text */
-            font-weight: 600;
-            border-left: 4px solid #fff; /* White border for emphasis */
-            transform: none; /* Reset hover slide for active state */
-        }
+.notice-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
 
-        /* Responsive Sidebar - Hidden on mobile, visible on desktop/tablet */
-        @media (max-width: 1024px) {
-            .sidebar {
-                display: none;
-            }
-            .content-area {
-                margin-left: 0 !important;
-            }
-        }
+.notice-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(123, 47, 247, 0.2), 0 4px 6px -4px rgba(123, 47, 247, 0.1);
+}
+
+.sidebar-link {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.sidebar-link.active {
+    background-color: var(--portal-light-accent);
+    color: #fff;
+    font-weight: 600;
+    border-left: 4px solid #fff;
+    transform: none;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content-area {
+        margin-left: 0 !important;
+    }
+}
